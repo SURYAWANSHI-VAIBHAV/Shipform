@@ -2,7 +2,7 @@ import React from 'react'
 
 function Formnav() {
   return (
-    <div className="navbar border-b bg-neutral-100">
+    <div className="navbar border-b bg-neutral-100 shadow-xl">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -21,7 +21,7 @@ function Formnav() {
           </div>
 
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <a className="btn btn-ghost text-xl">ShipForm</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <div role="tablist" className="tabs tabs-boxed">
@@ -31,7 +31,7 @@ function Formnav() {
         </div>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        <a className="btn">Preview</a>
       </div>
     </div>
   )
