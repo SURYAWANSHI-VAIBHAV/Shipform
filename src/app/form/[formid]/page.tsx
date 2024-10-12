@@ -32,6 +32,7 @@ function Page() {
   if (error) {
     return <div className="h-screen bg-[#f3f4f6d1] text-center text-red-500">{error}</div>;
   }
+  console.log(formData)
 
   return (
     <div className='w-full h-screen'>\

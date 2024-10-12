@@ -35,12 +35,12 @@ export default function Page() {
 
     const createForm = async () => {
         try {
-            const { data } = await axios.post(`http://localhost:3000/api/form/createform/${formid}`, {
+            const { data } = await axios.put(`http://localhost:3000/api/form/updateform/${formid}`, {
                 formid: formid,
                 userId: "123",
                 inputs: inputs,
                 isLive: true,
-                formName: formName
+                formName: value
             });
         } catch (err) {
             setError('Failed to fetch form data.');
