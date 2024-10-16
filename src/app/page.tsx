@@ -2,10 +2,10 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="bg-gray-50 min-h-screen flex flex-col justify-between">
+    <div className="bg-gray-100 min-h-screen flex flex-col justify-between">
       {/* Hero Section */}
-      <header className="bg-gradient-to-r from-blue-500 to-purple-600 py-20 text-center text-white">
-        <div className="container mx-auto px-4">
+      <header className="relative bg-gradient-to-r from-indigo-500 to-purple-600 py-24 text-center text-white">
+        <div className="container mx-auto px-6">
           <Image
             className="mx-auto"
             src="/logo.svg" // Replace with your logo
@@ -13,26 +13,31 @@ export default function Home() {
             width={100}
             height={100}
           />
-          <h1 className="text-5xl font-bold mt-6">
-            The Ultimate SaaS Solution for Your Business
+          <h1 className="text-6xl font-extrabold mt-6 leading-tight tracking-tight">
+            Elevate Your Business with Our SaaS Platform
           </h1>
-          <p className="text-lg mt-4">
-            Empower your team with modern tools and simplify your operations.
+          <p className="text-lg mt-4 opacity-90 max-w-2xl mx-auto">
+            Simplify your operations and accelerate growth with cutting-edge
+            tools designed for modern businesses.
           </p>
           <a
             href="#get-started"
-            className="inline-block mt-8 bg-white text-blue-600 font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-200 transition"
+            className="inline-block mt-10 bg-white text-indigo-600 font-bold py-4 px-10 rounded-full shadow-lg hover:bg-gray-100 transition duration-300 transform hover:scale-105"
           >
             Get Started
           </a>
         </div>
+        {/* Decorative background elements */}
+        <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-t from-blue-500 opacity-20 pointer-events-none"></div>
       </header>
 
       {/* Features Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-center text-4xl font-bold mb-10">Features</h2>
-          <div className="grid sm:grid-cols-3 gap-10">
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-6">
+          <h2 className="text-center text-5xl font-bold text-gray-800 mb-12">
+            Our Key Features
+          </h2>
+          <div className="grid sm:grid-cols-3 gap-12">
             <div className="text-center">
               <Image
                 src="/feature1.svg" // Replace with your feature icon
@@ -40,9 +45,12 @@ export default function Home() {
                 width={80}
                 height={80}
               />
-              <h3 className="mt-6 text-2xl font-semibold">Feature One</h3>
-              <p className="mt-4 text-gray-600">
-                Streamline your workflow with feature one.
+              <h3 className="mt-6 text-3xl font-semibold text-gray-800">
+                Feature One
+              </h3>
+              <p className="mt-4 text-gray-500 max-w-md mx-auto">
+                Streamline your workflow with intelligent automation and
+                integrated processes.
               </p>
             </div>
             <div className="text-center">
@@ -52,9 +60,11 @@ export default function Home() {
                 width={80}
                 height={80}
               />
-              <h3 className="mt-6 text-2xl font-semibold">Feature Two</h3>
-              <p className="mt-4 text-gray-600">
-                Increase productivity with feature two.
+              <h3 className="mt-6 text-3xl font-semibold text-gray-800">
+                Feature Two
+              </h3>
+              <p className="mt-4 text-gray-500 max-w-md mx-auto">
+                Enhance team productivity with advanced collaboration tools.
               </p>
             </div>
             <div className="text-center">
@@ -64,9 +74,12 @@ export default function Home() {
                 width={80}
                 height={80}
               />
-              <h3 className="mt-6 text-2xl font-semibold">Feature Three</h3>
-              <p className="mt-4 text-gray-600">
-                Collaborate seamlessly with feature three.
+              <h3 className="mt-6 text-3xl font-semibold text-gray-800">
+                Feature Three
+              </h3>
+              <p className="mt-4 text-gray-500 max-w-md mx-auto">
+                Collaborate seamlessly with real-time data insights and
+                analytics.
               </p>
             </div>
           </div>
@@ -76,27 +89,32 @@ export default function Home() {
       {/* Call to Action Section */}
       <section
         id="get-started"
-        className="py-20 bg-gradient-to-r from-blue-500 to-purple-600 text-center text-white"
+        className="py-24 bg-gradient-to-r from-indigo-500 to-purple-600 text-center text-white"
       >
-        <h2 className="text-4xl font-bold">Ready to Get Started?</h2>
-        <p className="text-lg mt-4">
-          Join thousands of businesses who trust us with their operations.
+        <h2 className="text-5xl font-bold">Ready to Get Started?</h2>
+        <p className="text-lg mt-6 opacity-90">
+          Join thousands of businesses who trust our platform to scale their
+          operations.
         </p>
         <a
           href="/signup"
-          className="mt-8 inline-block bg-white text-blue-600 font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-200 transition"
+          className="mt-10 inline-block bg-white text-indigo-600 font-bold py-4 px-10 rounded-full shadow-lg hover:bg-gray-100 transition duration-300 transform hover:scale-105"
         >
           Sign Up for Free
         </a>
       </section>
 
       {/* Footer Section */}
-      <footer className="py-10 bg-gray-900 text-gray-400">
-        <div className="container mx-auto px-4 text-center">
+      <footer className="py-12 bg-gray-900 text-gray-400">
+        <div className="container mx-auto px-6 text-center">
           <p>© 2024 Your SaaS Company. All rights reserved.</p>
-          <div className="flex justify-center gap-6 mt-4">
-            <a href="/privacy" className="hover:text-white">Privacy Policy</a>
-            <a href="/terms" className="hover:text-white">Terms of Service</a>
+          <div className="flex justify-center gap-8 mt-6">
+            <a href="/privacy" className="hover:text-white transition">
+              Privacy Policy
+            </a>
+            <a href="/terms" className="hover:text-white transition">
+              Terms of Service
+            </a>
           </div>
         </div>
       </footer>
