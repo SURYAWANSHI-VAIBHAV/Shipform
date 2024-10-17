@@ -49,7 +49,7 @@ function Page() {
         })),
       };
 
-      const res = await fetch('/api/response', {
+      const res = await fetch(`/api/response/${formid}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

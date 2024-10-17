@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Document, model, models, Schema } from 'mongoose';
 
 // Define the interface for the form field structure
 interface IFormField {
@@ -24,7 +24,7 @@ const formFieldSchema = new Schema<IFormField>({
 });
 
 // Define the main schema for the form response
-const responseSchema = new Schema<IResponse>({
+const ResponseSchema = new Schema<IResponse>({
   userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   ownerId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   formId: { type: String, required: true, unique: true },
@@ -32,6 +32,6 @@ const responseSchema = new Schema<IResponse>({
 }, { timestamps: true });
 
 // Create the model
-const ResponseModel = mongoose.model<IResponse>('Response', responseSchema);
+const ResponseModel = models.Response || model('Response', ResponseSchema);
 
 export default ResponseModel;

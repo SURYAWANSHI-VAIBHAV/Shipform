@@ -1,56 +1,62 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import connectDB from '../../../lib/mongodb';
-import ResponseModel from '../../../models/Response';
+import { NextRequest, NextResponse } from 'next/server';  // Import NextResponse
+import connectDB from '@/utils/dbConnect';
+import ResponseModel from '@/models/response';
 
-// GET, PUT, DELETE operations for a single response
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { method } = req;
-  const { id } = req.query;
-
+// GET
+export async function GET(req: Request, { params }: { params: { id: string } }) {
   await connectDB();
 
-  switch (method) {
-    case 'GET':
-      try {
-        const response = await ResponseModel.findById(id);
-        if (!response) {
-          return res.status(404).json({ success: false, message: 'Response not found' });
-        }
-        res.status(200).json({ success: true, data: response });
-      } catch (error) {
-        res.status(400).json({ success: false });
-      }
-      break;
+  try {
+    const response = await ResponseModel.findById(params.id);
+    if (!response) {
+      return NextResponse.json({ success: false, message: 'Response not found' }, { status: 404 });
+    }
+    return NextResponse.json({ success: true, data: response }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ success: false, message: 'Error fetching response' }, { status: 400 });
+  }
+}
 
-    case 'PUT':
-      try {
-        const response = await ResponseModel.findByIdAndUpdate(id, req.body, {
-          new: true, // Return the updated document
-          runValidators: true
-        });
-        if (!response) {
-          return res.status(404).json({ success: false, message: 'Response not found' });
-        }
-        res.status(200).json({ success: true, data: response });
-      } catch (error) {
-        res.status(400).json({ success: false });
-      }
-      break;
+export async function POST(req: NextRequest, res: NextResponse) {
+  try {
+    const reqBody = await req.json(); 
+    const {  userId, formData, isLive, inputs }: any = reqBody;
 
-    case 'DELETE':
-      try {
-        const deletedResponse = await ResponseModel.findByIdAndDelete(id);
-        if (!deletedResponse) {
-          return res.status(404).json({ success: false, message: 'Response not found' });
-        }
-        res.status(200).json({ success: true, data: {} });
-      } catch (error) {
-        res.status(400).json({ success: false });
-      }
-      break;
+    const newResponse = await ResponseModel.create(reqBody);
+    NextResponse.json({ success: true, data: newResponse });
+  } catch (error) {
+    NextResponse.json({ success: false, message: 'Error creating response' });
+  }
+}
 
-    default:
-      res.status(400).json({ success: false });
-      break;
+
+// PUT
+export async function PUT(req: Request, { params }: { params: { id: string } }) {
+  await connectDB();
+
+  try {
+    const body = await req.json();
+    const response = await ResponseModel.findByIdAndUpdate(params.id, body, { new: true, runValidators: true });
+    if (!response) {
+      return NextResponse.json({ success: false, message: 'Response not found' }, { status: 404 });
+    }
+    return NextResponse.json({ success: true, data: response }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ success: false, message: 'Error updating response' }, { status: 400 });
+  }
+}
+
+// DELETE
+export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+  await connectDB();
+
+  try {
+    const deletedResponse = await ResponseModel.findByIdAndDelete(params.id);
+    if (!deletedResponse) {
+      return NextResponse.json({ success: false, message: 'Response not found' }, { status: 404 });
+    }
+    return NextResponse.json({ success: true, data: {} }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ success: false, message: 'Error deleting response' }, { status: 400 });
   }
 }

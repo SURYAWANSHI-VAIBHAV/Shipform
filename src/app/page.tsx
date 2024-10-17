@@ -1,36 +1,13 @@
+import HeroSection from "@/components/heroSection/herosection";
+import Navbar from "@/components/Navigation/navbar";
 import Image from "next/image";
 
 export default function Home() {
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col justify-between">
-      {/* Hero Section */}
-      <header className="relative bg-gradient-to-r from-indigo-500 to-purple-600 py-24 text-center text-white">
-        <div className="container mx-auto px-6">
-          <Image
-            className="mx-auto"
-            src="/logo.svg" // Replace with your logo
-            alt="SaaS Logo"
-            width={100}
-            height={100}
-          />
-          <h1 className="text-6xl font-extrabold mt-6 leading-tight tracking-tight">
-            Elevate Your Business with Our SaaS Platform
-          </h1>
-          <p className="text-lg mt-4 opacity-90 max-w-2xl mx-auto">
-            Simplify your operations and accelerate growth with cutting-edge
-            tools designed for modern businesses.
-          </p>
-          <a
-            href="#get-started"
-            className="inline-block mt-10 bg-white text-indigo-600 font-bold py-4 px-10 rounded-full shadow-lg hover:bg-gray-100 transition duration-300 transform hover:scale-105"
-          >
-            Get Started
-          </a>
-        </div>
-        {/* Decorative background elements */}
-        <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-t from-blue-500 opacity-20 pointer-events-none"></div>
-      </header>
-
+    
+    <Navbar/>
+<HeroSection/>
       {/* Features Section */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">

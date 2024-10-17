@@ -10,7 +10,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="border-b  h-12 px-20">
+    <nav className="border-b  h-14 px-20">
       <div className="flex items-center justify-between">
         <div className="dark:text-white text-lg font-bold">
           <Link href="/">My App</Link>
