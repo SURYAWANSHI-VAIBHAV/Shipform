@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';  // Import NextResponse
+import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/utils/dbConnect';
 import ResponseModel from '@/models/response';
 
 // GET
-export async function GET(req: Request, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
   await connectDB();
 
   try {
@@ -17,21 +17,23 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
   }
 }
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
   try {
-    const reqBody = await req.json(); 
-    const {  userId, formData, isLive, inputs }: any = reqBody;
-
-    const newResponse = await ResponseModel.create(reqBody);
-    NextResponse.json({ success: true, data: newResponse });
+    await connectDB();
+    
+    const { userId, formData, ownerId,formId } = await req.json(); 
+    console.log(userId, formData, ownerId,formId)
+    const newResponse = await ResponseModel.create({ userId, formData,ownerId,formId });
+    console.log(newResponse)
+    
+    return NextResponse.json({ success: true, data: newResponse }, { status: 201 });
   } catch (error) {
-    NextResponse.json({ success: false, message: 'Error creating response' });
+    const errorMessage = error?.message || 'Error creating response';
+    return NextResponse.json({ success: false, message: errorMessage }, { status: 400 });
   }
 }
-
-
 // PUT
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
   await connectDB();
 
   try {
@@ -47,7 +49,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 }
 
 // DELETE
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
   await connectDB();
 
   try {

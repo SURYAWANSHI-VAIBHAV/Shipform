@@ -31,6 +31,7 @@ function Page() {
 
     getForm();
   }, [formid]);
+  console.log(formDetails)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInput({ ...userInput, [e.target.name]: e.target.value });
@@ -40,8 +41,8 @@ function Page() {
     e.preventDefault();
     try {
       const response = {
-        userId: 'your-user-id',  // Replace with actual userId
-        ownerId: formDetails.ownerId,
+        userId: 'user123',  // Replace with actual userId
+        ownerId: formDetails.userId,
         formId: formid,
         formData: Object.keys(userInput).map((labelName) => ({
           labelName,

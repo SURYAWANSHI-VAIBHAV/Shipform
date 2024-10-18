@@ -17,7 +17,7 @@ export const GET = async (req: NextRequest, { params }: { params: { formId: stri
     }
 
     // Find the form by formId
-    const form = await Form.findOne({ formId });
+    const form = await Form.findById(formId );
 
     // Check if form exists
     if (!form) {
