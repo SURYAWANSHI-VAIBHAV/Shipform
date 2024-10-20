@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
 
@@ -10,31 +10,31 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="border-b  h-14 px-20">
+    <nav className="border-b bg-background text-foreground h-14 px-8">
       <div className="flex items-center justify-between">
-        <div className="dark:text-white text-lg font-bold">
-          <Link href="/">My App</Link>
+        <div className="text-lg font-bold">
+          <Link href="/" className="text-primary">My App</Link>
         </div>
-        <div className="hidden md:flex space-x-4">
-          <Link href="/" className="dark:text-white hover:text-gray-400">Home</Link>
-          <Link href="/about" className="dark:text-white hover:text-gray-400">About</Link>
-          <Link href="/contact" className="dark:text-white hover:text-gray-400">Contact</Link>
-          <Link href="/profile" className="dark:text-white hover:text-gray-400">Profile</Link>
+        <div className="hidden md:flex space-x-6">
+          <Link href="/" className="hover:text-muted-foreground transition-colors">Home</Link>
+          <Link href="/about" className="hover:text-muted-foreground transition-colors">About</Link>
+          <Link href="/contact" className="hover:text-muted-foreground transition-colors">Contact</Link>
+          <Link href="/profile" className="hover:text-muted-foreground transition-colors">Profile</Link>
         </div>
         <button
-          className="md:hidden dark:text-white focus:outline-none"
+          className="md:hidden text-foreground focus:outline-none"
           onClick={toggleMenu}
         >
           {isOpen ? 'Close' : 'Menu'}
         </button>
       </div>
       {isOpen && (
-        <div className="md:hidden">
-          <div className="flex flex-col space-y-2 mt-2">
-            <Link href="/" className="dark:text-white hover:text-gray-400">Home</Link>
-            <Link href="/about" className="dark:text-white hover:text-gray-400">About</Link>
-            <Link href="/contact" className="dark:text-white hover:text-gray-400">Contact</Link>
-            <Link href="/profile" className="dark:text-white hover:text-gray-400">Profile</Link>
+        <div className="md:hidden mt-2">
+          <div className="flex flex-col space-y-2">
+            <Link href="/" className="hover:text-muted-foreground transition-colors">Home</Link>
+            <Link href="/about" className="hover:text-muted-foreground transition-colors">About</Link>
+            <Link href="/contact" className="hover:text-muted-foreground transition-colors">Contact</Link>
+            <Link href="/profile" className="hover:text-muted-foreground transition-colors">Profile</Link>
           </div>
         </div>
       )}
