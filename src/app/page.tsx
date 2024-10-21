@@ -47,7 +47,7 @@ export default function Home() {
         <HeroSection />
 
         {/* Features Section */}
-        <section className="py-24 bg-white">
+        {/* <section className="py-24 bg-white">
           <div className="container mx-auto px-6">
             <h2 className="text-center text-5xl font-bold text-gray-800 mb-12">
               Our Key Features
@@ -67,7 +67,7 @@ export default function Home() {
         </section>
 
         {/* Call to Action Section */}
-        <section
+        {/* <section
           id="get-started"
           className="py-24 bg-gradient-to-r from-indigo-500 to-purple-600 text-center text-white"
         >
@@ -82,11 +82,11 @@ export default function Home() {
           >
             Sign Up for Free
           </a>
-        </section>
+        </section> */}
       </main>
 
       {/* Footer Section */}
-      <footer className="py-12 bg-gray-900 text-gray-400">
+      {/* <footer className="py-12 bg-gray-900 text-gray-400">
         <div className="container mx-auto px-6 text-center">
           <p>© 2024 Your SaaS Company. All rights reserved.</p>
           <div className="flex justify-center gap-8 mt-6">
@@ -98,7 +98,7 @@ export default function Home() {
             </a>
           </div>
         </div>
-      </footer>
+      </footer>  */}
     </div>
   );
 }
