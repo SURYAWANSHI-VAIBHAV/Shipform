@@ -4,7 +4,8 @@ import { LucideIcon, Star, CheckCircle, Users, ArrowUpRight } from 'lucide-react
 import { Button } from '@/components/ui/button';
 import { Card, CardTitle, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils'; // Utility for conditional classes
-
+import th1  from '@/public/images/th.jpg'
+import th2  from '@/public/images/th2.jpg'
 export default function LandingPage() {
     return (
         <div className="bg-white text-gray-900">
@@ -59,12 +60,12 @@ export default function LandingPage() {
                     <Testimonial
                         name="John Doe"
                         feedback="The drag-and-drop builder is amazing!"
-                        image="/images/user1.jpg"
+                        image={th1.src}
                     />
                     <Testimonial
                         name="Jane Smith"
                         feedback="The real-time analytics have helped me grow my business."
-                        image="/images/user2.jpg"
+                        image={th2.src}
                     />
                 </div>
             </Section>
@@ -79,16 +80,17 @@ export default function LandingPage() {
 function HeroSection() {
     return (
         <section className="h-screen flex items-center justify-center bg-gray-100">
-            <div className="text-center max-w-2xl mx-auto tracking-widest">
+            <div className="text-center max-w-4xl mx-auto tracking-widest px-10">
                 <h1 className="text-7xl font-bold mb-4">
                     Build
-                    <span className="text-blue-600"> customize forms </span>
-                    in seconds
+                    <span className="text-blue-600">  beautiful forms 
+                      </span> {" "}
+                     in seconds
                 </h1>
                 <p className="text-lg mb-6 text-gray-700">
                     Create forms and share them. No coding required. Start for free!
                 </p>
-                <Link href={'/form/dashboard'}> <button className='btn bg-transparent text-blue-600'>Create a form <span><ArrowUpRight /></span></button></Link>
+                <Link href={'/form/dashboard'}> <button className='btn  bg-blue-600 text-white text-lg '>Create a form <span><ArrowUpRight /></span></button></Link>
 
                 <div className="flex gap-4 justify-center mt-10 text-md text-gray-600">
                     <p>✅ Unlimited forms</p>
@@ -143,7 +145,7 @@ function PricingCard({ title, price, features }: { title: string, price: string,
 function Testimonial({ name, feedback, image }: { name: string, feedback: string, image: string }) {
     return (
         <Card className="bg-white shadow p-6">
-            <img src={image} alt={name} className="w-16 h-16 rounded-full mx-auto mb-4" />
+            <img src={image} alt={name} className="w-20 h-20 rounded-full mx-auto mb-4" />
             <p className="italic mb-4 text-gray-700">"{feedback}"</p>
             <p className="font-bold text-gray-800">{name}</p>
         </Card>
@@ -154,7 +156,7 @@ function Testimonial({ name, feedback, image }: { name: string, feedback: string
 function Footer() {
     return (
         <footer className="py-8 bg-gray-100 text-center">
-            <p className="text-gray-600">© 2024 Your Company. All rights reserved.</p>
+            <p className="text-gray-600">© 2024 FormEdge. All rights reserved.</p>
             <div className="mt-4 space-x-4">
                 <Link href="/about" className="text-gray-600 hover:text-gray-800">About</Link>
                 <Link href="/contact" className="text-gray-600 hover:text-gray-800">Contact</Link>

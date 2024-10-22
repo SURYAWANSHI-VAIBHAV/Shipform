@@ -9,7 +9,8 @@ export const POST = async (req: NextRequest,{ params }: { params: { formId: stri
 
   try {
     // Extract form data from the request body (req.json() needs to be awaited)
-    const { formId } = params;
+    const { formId } = await params;
+
     if (!formId) {
       return NextResponse.json({ error: 'formId is required' }, { status: 400 });
     }
