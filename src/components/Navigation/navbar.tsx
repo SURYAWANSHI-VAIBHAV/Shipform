@@ -14,15 +14,15 @@ const Navbar = () => {
     <nav className="border-b bg-background text-foreground h-16  px-8">
       <div className="flex items-center justify-between h-full">
         <div className="text-lg font-bold">
-          <Link href="/" className="text-primary">Ship Form</Link>
+          <Link href="/" className="text-primary">FormEdge</Link>
         </div>
         <div className="hidden md:flex space-x-6 items-center">
-          <Link href="/" className="hover:text-muted-foreground transition-colors">Templates</Link>
+          <Link href="/template" className="hover:text-muted-foreground transition-colors">Templates</Link>
           <Link href="/whatsnew" className="hover:text-muted-foreground transition-colors">What's new?</Link>
           <Link href="/pricing" className="hover:text-muted-foreground transition-colors">Pricing</Link>
           <Link href="/help" className="hover:text-muted-foreground transition-colors">Help</Link>
-          <Link href={'/login'}> <button className='btn bg-transparent text-blue-600'>login<span><ArrowUpRight /></span></button></Link>
-          <Link href={'/form/dashboard'}> <button className='btn bg-transparent text-blue-600'>Create a form <span><ArrowUpRight /></span></button></Link>
+          <Link href={'/login'}> <button className='btn bg-blue-600 text-white dark:bg-blue-400'>Login<span><ArrowUpRight /></span></button></Link>
+          <Link href={'/form/dashboard'}> <button className='btn  text-blue-600 border-blue-500'>Create a form <span><ArrowUpRight /></span></button></Link>
 
         </div>
         <button

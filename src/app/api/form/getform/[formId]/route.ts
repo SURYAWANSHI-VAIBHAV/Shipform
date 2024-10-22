@@ -9,7 +9,8 @@ export const GET = async (req: NextRequest, { params }: { params: { formId: stri
 
   try {
     // Extract formId from the URL parameters
-    const { formId } = params;
+    const { formId } =await params;
+    console.log(formId)
 
     // Validate formId
     if (!formId) {
@@ -17,7 +18,8 @@ export const GET = async (req: NextRequest, { params }: { params: { formId: stri
     }
 
     // Find the form by formId
-    const form = await Form.findById(formId );
+    const form = await Form.findOne({formId:formId});
+    console.log(form)
 
     // Check if form exists
     if (!form) {
