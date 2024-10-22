@@ -92,12 +92,12 @@ const Page: React.FC = () => {
   return (
     <div className="w-full h-screen">
       <Navbar />
-      <div className="w-full flex h-[calc(100vh-4rem)] overflow-y-auto bg-gray-200">
+      <div className="w-full flex h-[calc(100vh-4rem)] overflow-y-auto bg-gray-100">
         <div className="w-10/12 mx-auto pt-10">
           <div className="flex justify-center mb-6">
-            <h1 className="text-3xl text-center">{formDetails?.formName}</h1>
+            <h1 className="text-4xl font-bold text-center mb-4">{formDetails?.formName}</h1>
           </div>
-          <form onSubmit={handleSubmit} className="w-1/2 mx-auto flex flex-col">
+          <form onSubmit={handleSubmit} className="w-full max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg">
             {formDetails?.inputs.map(({ _id, type, labelName, isRequired }) => (
               <FormInputField
                 key={_id}
@@ -108,7 +108,10 @@ const Page: React.FC = () => {
                 onChange={handleInputChange}
               />
             ))}
-            <button type="submit" className="btn btn-success w-1/2 mt-4">
+            <button
+              type="submit"
+              className="bg-blue-500 text-white w-full py-2 rounded-lg mt-6 hover:bg-blue-600 transition duration-200"
+            >
               Submit
             </button>
           </form>
@@ -127,10 +130,10 @@ interface FormInputFieldProps {
 }
 
 const FormInputField: React.FC<FormInputFieldProps> = ({ type, labelName, isRequired, value, onChange }) => (
-  <div className="mb-4">
-    <label htmlFor={labelName} className="block mb-2">
+  <div className="mb-6">
+    <label htmlFor={labelName} className="block mb-2 text-lg font-medium text-gray-700">
       {labelName}
-      {isRequired && <span className="text-red-500">*</span>}
+      {isRequired && <span className="text-red-500"> *</span>}
     </label>
     <input
       type={type}
@@ -140,7 +143,7 @@ const FormInputField: React.FC<FormInputFieldProps> = ({ type, labelName, isRequ
       value={value}
       onChange={onChange}
       placeholder={`Enter your ${labelName}`}
-      className="bg-transparent input input-bordered w-full"
+      className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
     />
   </div>
 );

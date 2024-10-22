@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
 import { useParams } from 'next/navigation';
 import axios from 'axios';
+import Sidebar from '@/components/Navigation/sidebar';
 
 interface input {
     id: string,
@@ -98,10 +99,11 @@ export default function Page() {
 
 
     return (
-        <div className='w-full h-screen'>
+        <div className='w-full h-screen flex flex-col'>
             <Formnav />
             <div className='w-full flex h-[calc(100vh-4rem)]  overflow-y-auto bg-[#f3f4f6d1]'>
-                <div className='w-10/12 mx-auto pt-10'>
+                <Sidebar/>
+                <div className='w-10/12 mx-auto pt-10 flex flex-col'>
                     <div className='flex w-full justify-center '>
                         {editFormName ?
 
