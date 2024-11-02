@@ -1,5 +1,5 @@
 import React from 'react'
-
+import heroimage from './../../../../../public/Hero.png'
 function PageFeature() {
   return (
     <div>
@@ -26,7 +26,7 @@ function PageFeature() {
           </div>
 
           <div className="bg-gray-800 rounded-b-lg">
-            <img className="max-w-full h-auto rounded-b-lg" src="/hero.png" alt="Features Image"/>
+            <img className="max-w-full h-auto rounded-b-lg" src={heroimage.src} alt="Features Image"/>
           </div>
         </figure>
       </div>
