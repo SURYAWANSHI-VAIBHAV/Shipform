@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'next/navigation';
 
-const ViewForm = ({ params }: { params: Promise<{ id: string }> }) => {
+const ViewForm = () => {
   const { id } = useParams();
   const [form, setForm] = useState(null);
   const [responses, setResponses] = useState<{ [key: number]: string }>({});
@@ -20,9 +20,9 @@ const ViewForm = ({ params }: { params: Promise<{ id: string }> }) => {
     fetchForm();
   }, [id]);
 
-  const handleResponseChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
-    setResponses({ ...responses, [index]: event.target.value });
-  };
+  // const handleResponseChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setResponses({ ...responses, [index]: event.target.value });
+  // };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
