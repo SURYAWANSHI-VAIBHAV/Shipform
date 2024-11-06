@@ -1,5 +1,5 @@
 // models/Response.js
-const mongoose = require('mongoose');
+import mongoose from 'mongoose'
 
 const responseSchema = new mongoose.Schema({
   formId: { type: mongoose.Schema.Types.ObjectId, ref: 'Form', required: true },

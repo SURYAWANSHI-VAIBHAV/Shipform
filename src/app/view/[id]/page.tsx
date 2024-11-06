@@ -53,7 +53,7 @@ const ViewForm = ({ params }: { params: Promise<{ id: string }> }) => {
     <div className="flex flex-col items-center justify-center py-12 px-4 bg-gray-50 min-h-screen">
       <form onSubmit={handleSubmit} className="w-full max-w-lg bg-white p-8 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold text-gray-700 mb-6">{form.title}</h2>
-        {form.fields.map((field: any, index: number) => (
+        {form.fields.map((field, index) => (
           <div key={index} className="mb-4">
             <label className="block text-sm font-medium text-gray-600 mb-2">{field.label}</label>
             <input

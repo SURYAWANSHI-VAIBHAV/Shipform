@@ -4,7 +4,6 @@ import "./globals.css";
 import Nav from "@/components/Navigation/nav";
 import Footer from "@/components/Navigation/footer";
 import PrelineScript from "@/components/Preline/preline";
-import AuthProvider from "@/components/SessionProvider/authprovider";
 import { Analytics } from '@vercel/analytics/react';
 const geistSans = localFont({
 

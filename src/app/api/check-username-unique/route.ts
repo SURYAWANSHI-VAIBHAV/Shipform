@@ -10,7 +10,7 @@ const usernameSchema = z.object({
   username:userScheama
 });
 
-export  async function GET(req:Request, res:Response) {
+export  async function GET(req:Request) {
     await dbConnect();
     try {
         const {searchParams}=  new URL(req.url);
