@@ -1,5 +1,5 @@
 import React from 'react';
-import FormBuilder from '../components/FormBuilder/formbuilder';
+import FormBuilder from '../../components/FormBuilder/formbuilder';
 
 function Page() {
   return (
