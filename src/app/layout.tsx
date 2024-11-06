@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import PrelineScript from "./components/Preline/preline";
-import Nav from "./components/Navigation/nav";
-import Footer from "./components/Navigation/footer";
-
+import Nav from "@/components/Navigation/nav";
+import Footer from "@/components/Navigation/footer";
+import PrelineScript from "@/components/Preline/preline";
+import AuthProvider from "@/components/SessionProvider/authprovider";
+import { Analytics } from '@vercel/analytics/react';
 const geistSans = localFont({
+
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
@@ -31,10 +33,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+
         <Nav/>
         {children}
         <Footer/>
         <PrelineScript />
+        <Analytics/>
       </body>
     </html>
   );

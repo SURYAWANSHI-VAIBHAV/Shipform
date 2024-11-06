@@ -1,8 +1,8 @@
+import Faq from '@/components/Sections/Faq/faq'
+import Features from '@/components/Sections/Features/features'
+import Hero from '@/components/Sections/HeroSection/hero'
+import Pricing from '@/components/Sections/Pricing/pricing'
 import React from 'react'
-import Hero from './components/Sections/HeroSection/hero'
-import Features from './components/Sections/Features/features'
-import Pricing from './components/Sections/Pricing/pricing'
-import Faq from './components/Sections/Faq/faq'
 
 function page() {
   return (
