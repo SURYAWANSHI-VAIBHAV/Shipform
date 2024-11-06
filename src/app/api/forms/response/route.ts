@@ -1,10 +1,10 @@
 // src/app/api/forms/response.ts
 import { NextResponse } from 'next/server';
-import connectDB from '../../../../../lib/db';
-import Response from '../../../../../lib/model/Response';
+import { dbConnect } from '@/lib/dbConfig';
+import Response from '@/model/Response';
 
 export async function POST(request: Request) {
-  await connectDB();
+  await dbConnect();
   const { formId, responses } = await request.json();
 
   try {
