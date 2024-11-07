@@ -7,7 +7,7 @@ function Footer() {
                 <div className="mt-auto w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 lg:pt-20 mx-auto">
                     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
                         <div className="col-span-full lg:col-span-1">
-                            <a className="flex-none text-xl font-semibold text-gray-900 dark:text-white focus:outline-none focus:opacity-80" href="#" aria-label="Brand">Brand</a>
+                            <a className="flex-none text-xl font-semibold text-gray-900 dark:text-white focus:outline-none focus:opacity-80" href="#" aria-label="Brand">FormEdge</a>
                         </div>
 
                         <div className="col-span-1">
@@ -42,7 +42,7 @@ function Footer() {
                                     </a>
                                 </div>
                                 <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
-                                    New UI kits or big discounts. Never spam.
+                                Create beautiful forms and share them anywhere.
                                 </p>
                             </form>
                         </div>
@@ -51,10 +51,9 @@ function Footer() {
                     <div className="mt-5 sm:mt-12 grid gap-y-2 sm:gap-y-0 sm:flex sm:justify-between sm:items-center">
                         <div className="flex justify-between items-center">
                             <p className="text-sm text-gray-500 dark:text-neutral-400">
-                                © 2024 Preline Labs.
+                                © 2024 FormEdge.
                             </p>
                         </div>
-                        {/* Social Icons */}
                     </div>
                 </div>
             </footer>

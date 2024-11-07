@@ -3,24 +3,14 @@ import React from 'react';
 import heroImage from './../../../../public/Hero.png';
 import { useSession, signIn } from 'next-auth/react';
 import Link from 'next/link';
+import Nav from '@/components/Navigation/nav';
 
 function Page() {
-  const { data: session } = useSession();
-
-  // If the user is already signed in, you can redirect them or show a message
-  // Optionally uncomment the next block to redirect
-  // if (session) {
-  //   return (
-  //     <div className='py-20'>
-  //       <p>You are already signed in as {session.user.name}.</p>
-  //     </div>
-  //   );
-  // }
-
-  console.log(session?.user);
 
   return (
-    <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
+    <div>
+      <Nav/>
+      <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900 text-black">
       <div className="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
         <div className="flex flex-col overflow-y-auto md:flex-row">
           <div className="h-32 md:h-auto md:w-1/2 border">
@@ -45,7 +35,7 @@ function Page() {
               <label className="block text-sm">
                 <span className="text-gray-700 dark:text-gray-400">Email</span>
                 <input
-                  className="block w-full mt-1 text-sm border-gray-100 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  className="block w-full bg-transparent mt-1 text-sm border-gray-100 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                   placeholder="Jane Doe"
                   type="email" // Change to email type for validation
                 />
@@ -53,7 +43,7 @@ function Page() {
               <label className="block mt-4 text-sm">
                 <span className="text-gray-700 dark:text-gray-400">Password</span>
                 <input
-                  className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  className="block w-full mt-1  bg-transparent text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                   placeholder="***************"
                   type="password"
                 />
@@ -86,7 +76,7 @@ function Page() {
               <p className="mt-4">
                 <Link
                   className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
-                  href={"/forgotpassword"}
+                  href={"/auth/forgotpassword"}
                 >
                   Forgot your password?
                 </Link>
@@ -94,7 +84,7 @@ function Page() {
               <p className="mt-1">
                 <Link
                   className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
-                  href={"/signup"}
+                  href={"/auth/signup"}
                 >
                   Create account
                 </Link>
@@ -103,6 +93,7 @@ function Page() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

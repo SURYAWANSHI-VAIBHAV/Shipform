@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Nav from "@/components/Navigation/nav";
-import Footer from "@/components/Navigation/footer";
 import PrelineScript from "@/components/Preline/preline";
 import { Analytics } from '@vercel/analytics/react';
 const geistSans = localFont({
@@ -33,9 +31,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
 
-        <Nav/>
         {children}
-        <Footer/>
         <PrelineScript />
         <Analytics/>
       </body>

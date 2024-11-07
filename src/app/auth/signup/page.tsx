@@ -6,6 +6,7 @@ import { z } from 'zod';
 // import { useRouter } from 'next/router';
 import { useState } from 'react';
 import axios from 'axios';
+import Nav from '@/components/Navigation/nav';
 
 // Define the Zod schema for validation
 const signupSchema = z.object({
@@ -41,7 +42,9 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100 text-black">
+    <div>
+      <Nav/>
+      <div className="flex min-h-screen items-center justify-center bg-gray-100 text-black">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full max-w-md p-6 bg-white rounded-md shadow-md"
@@ -55,7 +58,7 @@ const SignupPage = () => {
           <input
             type="text"
             {...register('username')}
-            className="w-full px-4 py-2 mt-1 border rounded-md focus:ring focus:ring-blue-200 focus:outline-none"
+            className="w-full px-4 py-2 mt-1 border bg-transparent rounded-md focus:ring focus:ring-blue-200 focus:outline-none"
           />
           {errors.username && (
             <p className="text-red-500 text-sm mt-1">{errors.username.message}</p>
@@ -67,7 +70,7 @@ const SignupPage = () => {
           <input
             type="email"
             {...register('email')}
-            className="w-full px-4 py-2 mt-1 border rounded-md focus:ring focus:ring-blue-200 focus:outline-none"
+            className="w-full px-4 py-2 mt-1 border bg-transparent rounded-md focus:ring focus:ring-blue-200 focus:outline-none"
           />
           {errors.email && (
             <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
@@ -79,7 +82,7 @@ const SignupPage = () => {
           <input
             type="password"
             {...register('password')}
-            className="w-full px-4 py-2 mt-1 border rounded-md focus:ring focus:ring-blue-200 focus:outline-none"
+            className="w-full px-4 py-2 mt-1 border bg-transparent rounded-md focus:ring focus:ring-blue-200 focus:outline-none"
           />
           {errors.password && (
             <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
@@ -93,6 +96,7 @@ const SignupPage = () => {
           Sign Up
         </button>
       </form>
+    </div>
     </div>
   );
 };

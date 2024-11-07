@@ -1,7 +1,10 @@
+import Nav from '@/components/Navigation/nav'
 import React from 'react'
 
 function page() {
   return (
+    <div>
+      <Nav/>
     <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
       <div
         className="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800"
@@ -31,7 +34,7 @@ function page() {
               <label className="block text-sm">
                 <span className="text-gray-700 dark:text-gray-400">Email</span>
                 <input
-                  className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  className="block w-full bg-transparent mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                   placeholder="Jane Doe"
                 />
               </label>
@@ -46,6 +49,7 @@ function page() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   )
 }

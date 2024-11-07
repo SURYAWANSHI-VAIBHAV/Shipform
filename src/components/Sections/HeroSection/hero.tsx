@@ -17,19 +17,20 @@ function Hero() {
                         </a>
                     </div>
 
-                    <div className="max-w-3xl text-center mx-auto">
-                        <h1 className="block font-medium text-gray-900 dark:text-gray-100 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
-                            Now it's easier than ever to build products
+                    <div className="max-w-2xl text-center mx-auto">
+                        <h1 className="block text-gray-900 font-semibold dark:text-gray-100 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+                        Build beautiful forms
+                        in seconds
                         </h1>
                     </div>
 
                     <div className="max-w-3xl text-center mx-auto">
-                        <p className="text-lg text-gray-700 dark:text-gray-400">Preline is a large open-source project, crafted with Tailwind CSS framework by Hmlstream.</p>
+                        <p className="text-lg text-gray-700 dark:text-gray-400">Create beautiful forms and share them anywhere. </p>
                     </div>
 
                     <div className="text-center">
                         <a className="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-tl from-blue-600 to-violet-600 shadow-lg hover:shadow-blue-700/50 dark:hover:shadow-blue-800/50 border border-transparent text-white text-sm font-medium rounded-full focus:outline-none focus:shadow-blue-700/50 dark:focus:shadow-blue-800/50 py-3 px-6" href="#">
-                            Get started
+                        Create a form
                             <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6" /></svg>
                         </a>
                     </div>

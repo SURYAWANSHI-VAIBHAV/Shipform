@@ -9,11 +9,15 @@ const formSchema = new mongoose.Schema({
       type: { type: String, default: 'text' },
     },
   ],
-  responses: [
-    {
-      type: mongoose.Schema.Types.Mixed, // You can adjust this based on your needs
-    },
-  ],
+  submissions:{
+    type:Number,
+    default:0
+  },
+  impressions:{
+    type:Number,
+    default:0
+
+  },
   createdAt: { type: Date, default: Date.now },
 });
 

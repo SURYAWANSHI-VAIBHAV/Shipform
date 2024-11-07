@@ -9,18 +9,33 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
   const { id } = await params;  // Unwrap the promise
   await dbConnect();
   const form = await Form.findById(id);
-  return NextResponse.json(form);
+  if (!form) {
+    return Response.json({ message: 'Form not found' },{status:400});
+  }
+
+  // Increment impressions count if the form is viewed
+  form.impressions += 1;
+  await form.save();
+  return Response.json(form);
 }
 
 export async function POST(request: Request, { params }: { params: Promise<{ id: string }> }) {
-  const response = await request.json();
-  const { id } = await params;  // Unwrap the promise
   await dbConnect();
+  const response = await request.json();
+  const { id } = await params;  
+  const form = await Form.findById(id);
+  if (!form) {
+    return Response.json({ message: 'Form not found' },{status:200});
+  }
 
+  // Increment submissions count
+  form.submissions += 1;
+  await form.save();
   await Form.updateOne(
     { _id: new mongoose.Types.ObjectId(id) },
     { $push: { responses: response } }
   );
+
 
   return NextResponse.json({ message: 'Response submitted successfully' }, { status: 201 });
 }
