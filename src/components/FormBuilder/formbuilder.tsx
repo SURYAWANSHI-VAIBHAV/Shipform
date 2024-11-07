@@ -11,7 +11,6 @@ const FormBuilder = () => {
   const [showModal, setShowModal] = useState(false); // To control modal visibility
   const [shareLink, setShareLink] = useState(''); // To store the generated share link
 
-  // Add a new field with a default type
   const addField = (index: number) => {
     const newField = { label: '', type: 'text', isEditingLabel: false };
     const newFields = [...fields];
@@ -20,41 +19,36 @@ const FormBuilder = () => {
   };
   
 
-  // Handle changes to the field label
   const handleFieldChange = (index: number, event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const newFields = [...fields];
     newFields[index].label = event.target.value;
     setFields(newFields);
   };
 
-  // Handle changes to the field type
   const handleFieldTypeChange = (index: number, event: React.ChangeEvent<HTMLSelectElement>) => {
     const newFields = [...fields];
     newFields[index].type = event.target.value;
     setFields(newFields);
   };
 
-  // Handle label click (enable editing)
   const handleLabelClick = (index: number) => {
     const newFields = [...fields];
     newFields[index].isEditingLabel = true;
     setFields(newFields);
   };
 
-  // Handle field label blur (disable editing)
   const handleLabelBlur = (index: number) => {
     const newFields = [...fields];
     newFields[index].isEditingLabel = false;
     setFields(newFields);
   };
 
-  // Render different input fields based on the type
   const renderField = (field: { label: string; type: string }, index: number) => {
     const commonProps = {
       value: field.label,
       onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => handleFieldChange(index, e),
       className: "text-gray-500 border border-gray-300 bg-transparent rounded-md p-2 mb-2 w-full",
-      disabled: true, // Make the field disabled
+      disabled: true, 
       required: true
     };
 
@@ -70,11 +64,9 @@ const FormBuilder = () => {
     }
   };
 
-  // Handle form submission
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    // Set title to formName if it's not yet set
     const formTitle = title || formName;
 
     if (!formTitle) {
@@ -83,20 +75,15 @@ const FormBuilder = () => {
     }
 
     try {
-      // Send form data to the server
       const response = await axios.post('http://localhost:3000/api/forms', { title: formTitle, fields });
 
-      // Assuming the backend responds with a unique form ID
       const formId = response.data._id;
 
-      // Generate the share link (assuming a URL format with form ID)
-      const generatedLink = `http://localhost:5173/forms/${formId}`;
+      const generatedLink = `http://localhost:3000/view/${formId}`;
       setShareLink(generatedLink);
 
-      // Show the modal with the share link
       setShowModal(true);
 
-      // Reset the form after successful submission
       setTitle('');
       setFields([{ label: '', type: 'text', isEditingLabel: false }]);
       setFormName('');
@@ -106,12 +93,10 @@ const FormBuilder = () => {
     }
   };
 
-  // Handle form name change (when editing)
   const handleFormNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormName(event.target.value);
   };
 
-  // Handle field deletion
   const handleDeleteField = (index: number) => {
     const newFields = fields.filter((_, fieldIndex) => fieldIndex !== index);
     setFields(newFields);

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 function Formnav() {
@@ -30,9 +31,9 @@ function Formnav() {
           <a role="tab" className="tab">
             Questions
           </a>
-          <a role="tab" className="tab tab-active">
+          <Link href={`/forms`} role="tab" className="tab tab-active">
             Responses
-          </a>
+          </Link>
           <a role="tab" className="tab">
             Settings
           </a>

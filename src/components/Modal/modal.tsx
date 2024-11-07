@@ -3,13 +3,11 @@ import React from 'react';
 import { FaCopy } from 'react-icons/fa';
 
 function Modal({ show, onClose, shareLink }:any) {
-  // Handle copy to clipboard action
   const handleCopyClick = () => {
     navigator.clipboard.writeText(shareLink)
   };
 
-  if (!show) return null; // Don't render if the modal is not open
-
+  if (!show) return null; 
   return (
     <div className="hs-overlay fixed top-0 left-0 w-full h-full bg-gray-500 bg-opacity-50 z-50 flex items-center justify-center">
       <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">

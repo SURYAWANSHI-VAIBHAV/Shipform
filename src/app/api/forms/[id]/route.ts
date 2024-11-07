@@ -13,7 +13,6 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
     return Response.json({ message: 'Form not found' },{status:400});
   }
 
-  // Increment impressions count if the form is viewed
   form.impressions += 1;
   await form.save();
   return Response.json(form);
