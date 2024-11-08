@@ -31,38 +31,29 @@ const ViewForm = () => {
     }));
 
     try {
-      // Send the response to the backend
       await axios.post(`/api/forms/response`, { formId: id, responses: formattedResponses });
 
-      // Display modal confirmation message
       setModalMessage("You have successfully submitted the form! 🎉");
       setModalVisible(true);
 
-      // Get the current submission count from cookies
       const currentCount = parseInt(Cookies.get('submissionCount') || '0', 10);
 
-      // Increment the submission count
       const newCount = currentCount + 1;
 
-      // Store the new count in the cookie
       Cookies.set('submissionCount', newCount.toString(), { expires: 7 }); // Store the count for 7 days
-      console.log("Total submissions: ", newCount);
     } catch (error) {
       console.error("Error submitting response:", error);
     }
   };
 
   useEffect(() => {
-    // Track impression count on page load
     const currentImpressionCount = parseInt(Cookies.get('impressionCount') || '0', 10);
     const newImpressionCount = currentImpressionCount + 1;
 
-    // Update the impression count cookie
     Cookies.set('impressionCount', newImpressionCount.toString(), { expires: 7 });
 
     console.log("Total impressions: ", newImpressionCount);
 
-    // Fetch the form data
     const fetchForm = async () => {
       try {
         const response = await axios.get(`/api/forms/${id}`);

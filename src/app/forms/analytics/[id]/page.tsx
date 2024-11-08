@@ -1,23 +1,29 @@
 'use client';
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Nav from "@/components/Navigation/nav";
 import { useParams, useRouter } from "next/navigation";
 
-// Define the expected shape of the analytics data
-interface FormAnalytics {
+// Define the expected shape of a response
+interface Response {
+  label: string;
+  value: string;
+}
+
+// Define the expected shape of each submission in analytics data
+interface Submission {
+  _id: string;
   formId: string;
-  totalSubmissions: number;
-  responses: { label: string; value: string }[]; // Adjust `value` to be a string
+  responses: Response[];
+  submittedAt: string;
 }
 
 const Analytics = () => {
   const { id } = useParams();
   const router = useRouter();
-  const [analytics, setAnalytics] = useState<FormAnalytics | null>(null);
+  const [submissions, setSubmissions] = useState<Submission[]>([]);
+  const [currentSubmissionIndex, setCurrentSubmissionIndex] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [responseIndex, setResponseIndex] = useState<number>(0); // Track the current response index
 
   useEffect(() => {
     const fetchAnalytics = async () => {
@@ -26,8 +32,7 @@ const Analytics = () => {
       setError(null);
       try {
         const response = await axios.get(`/api/analytics/${id}`);
-        setAnalytics(response.data);
-        setResponseIndex(0); // Reset the index when new data is fetched
+        setSubmissions(response.data);
       } catch (error) {
         setError("Error fetching analytics data.");
         console.error("Error fetching analytics:", error);
@@ -39,15 +44,15 @@ const Analytics = () => {
     fetchAnalytics();
   }, [id]);
 
-  const handleBackClick = () => {
-    setResponseIndex((prevIndex) =>
-      prevIndex > 0 ? prevIndex - 1 : analytics!.responses.length - 1
+  const handlePreviousClick = () => {
+    setCurrentSubmissionIndex((prevIndex) =>
+      prevIndex > 0 ? prevIndex - 1 : submissions.length - 1
     );
   };
 
   const handleNextClick = () => {
-    setResponseIndex((prevIndex) =>
-      prevIndex < analytics!.responses.length - 1 ? prevIndex + 1 : 0
+    setCurrentSubmissionIndex((prevIndex) =>
+      prevIndex < submissions.length - 1 ? prevIndex + 1 : 0
     );
   };
 
@@ -67,47 +72,58 @@ const Analytics = () => {
     );
   }
 
-  if (!analytics) {
+  if (!submissions.length) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="text-black">
+        <div className="flex justify-center items-center h-screen bg-[#F0EBF8] text-black">
         <div>No analytics data found for this form.</div>
+      </div>
       </div>
     );
   }
 
-  const currentResponse = analytics.responses[responseIndex];
+  const currentSubmission = submissions[currentSubmissionIndex];
 
   return (
     <div>
-      <Nav />
-      <div className="py-20 px-4 bg-[#F0EBF8] min-h-screen text-black">
-        <h2 className="text-2xl font-bold text-gray-700 mb-6">Form Analytics</h2>
+     <div className="w-full bg-[#F0EBF8] min-h-screen">
+     <div className="w-1/2 mx-auto py-20 px-4  text-black">
+        <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Form Analytics</h2>
+        
+        <div className="text-center mb-4">
+          <span className="text-lg font-semibold">
+            Submission {currentSubmissionIndex + 1} of {submissions.length}
+          </span>
+        </div>
+
         <div className="bg-white p-6 rounded-xl shadow-md mb-8">
-          <h3 className="text-xl font-semibold">{`Form ID: ${analytics.formId}`}</h3>
-          <p>Total Submissions: {analytics.totalSubmissions}</p>
+          <h3 className="text-xl font-semibold">{`Submission Date: ${new Date(currentSubmission.submittedAt).toLocaleString()}`}</h3>
           <div className="mt-4">
-            <h4 className="text-lg font-semibold">Response {responseIndex + 1} of {analytics.responses.length}:</h4>
-            <div className="mb-4">
-              <h5 className="font-medium">{currentResponse.label}:</h5>
-              <p>{currentResponse.value}</p> {/* Display the value directly */}
-            </div>
-            <div className="flex justify-between mt-6">
-              <button
-                className="bg-blue-500 text-white py-2 px-4 rounded"
-                onClick={handleBackClick}
-              >
-                Previous Response
-              </button>
-              <button
-                className="bg-blue-500 text-white py-2 px-4 rounded"
-                onClick={handleNextClick}
-              >
-                Next Response
-              </button>
-            </div>
+            {currentSubmission.responses.map((response, index) => (
+              <div key={index} className="mb-4">
+                <h5 className="font-medium capitalize text-lg mb-1 ">{response.label}:</h5>
+                <p className="border p-2 rounded-md">{response.value}</p>
+              </div>
+            ))}
           </div>
         </div>
+
+        <div className="flex justify-between mt-6">
+          <button
+            className="bg-blue-500 text-white py-2 px-4 rounded"
+            onClick={handlePreviousClick}
+          >
+            Previous Submission
+          </button>
+          <button
+            className="bg-blue-500 text-white py-2 px-4 rounded"
+            onClick={handleNextClick}
+          >
+            Next Submission
+          </button>
+        </div>
       </div>
+     </div>
     </div>
   );
 };

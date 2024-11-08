@@ -14,5 +14,5 @@ export async function POST(request: Request) {
 export async function GET() {
   await dbConnect();
   const forms = await Form.find({});
-  return NextResponse.json(forms);
+  return NextResponse.json(forms,{ status: 200 });
 }

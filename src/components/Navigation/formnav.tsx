@@ -1,9 +1,13 @@
+'use client'
 import Link from 'next/link';
-import React from 'react';
+import { useParams } from 'next/navigation';
+import React, { useState } from 'react';
 
 function Formnav() {
+  const [activeTab, setActiveTab] = useState('questions'); // default to 'questions'
+  const {id}=useParams()
   return (
-    <div className="navbar border-b bg-neutral-100 shadow-xl">
+    <div className="navbar border-b bg-neutral-100 shadow-xl text-black">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -23,26 +27,42 @@ function Formnav() {
             </svg>
           </div>
         </div>
-        <a className="text-xl font-semibold pl-10 ">Form Edge</a> 
+        <a className="text-xl font-semibold pl-10">Form Edge</a>
       </div>
 
       <div className="navbar-center hidden lg:flex">
         <div role="tablist" className="tabs tabs-boxed">
-          <a role="tab" className="tab">
+          <Link
+            href={`/forms/${id}`}
+            role="tab"
+            className={`tab ${activeTab === 'questions' ? 'tab-active' : ''}`}
+            onClick={() => setActiveTab('questions')}
+          >
             Questions
-          </a>
-          <Link href={`/forms`} role="tab" className="tab tab-active">
+          </Link>
+          <Link
+            href={`/forms/analytics/${id}`}
+            role="tab"
+            className={`tab ${activeTab === 'responses' ? 'tab-active' : ''}`}
+            onClick={() => setActiveTab('responses')}
+          >
             Responses
           </Link>
-          <a role="tab" className="tab">
+          <Link
+            href={`/forms/settings/${id}`}
+            role="tab"
+            className={`tab ${activeTab === 'settings' ? 'tab-active' : ''}`}
+            onClick={() => setActiveTab('settings')}
+          >
             Settings
-          </a>
+          </Link>
         </div>
       </div>
 
       {/* Preview Button */}
-      <div className="navbar-end">
-        <a className="btn  text-white">Preview</a>
+      <div className="navbar-end md:pr-14">
+        <a href="/dashboard" className='btn btn-primary mr-2'>Dashboard</a>
+        <a className="btn text-white">Preview</a>
       </div>
     </div>
   );

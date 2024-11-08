@@ -1,23 +1,41 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from '../../components/Modal/modal'; // Import the Modal component
 import { FaPlus, FaTrash } from 'react-icons/fa';
+import { useRouter } from 'next/navigation'; // For dynamic routing
 
-const FormBuilder = () => {
+const FormBuilder = ({ formId }: any) => {
+  const router = useRouter();
   const [title, setTitle] = useState('');
-  const [fields, setFields] = useState([{ label: '', type: 'text', isEditingLabel: false }]);
-  const [editFormName, setEditFormName] = useState(false);
+  const [fields, setFields] = useState([{ label: '', type: 'text', isEditingLabel: false }]); // Ensure one field is present
   const [formName, setFormName] = useState('');
   const [showModal, setShowModal] = useState(false); // To control modal visibility
   const [shareLink, setShareLink] = useState(''); // To store the generated share link
 
+  // Fetch the form data if formId is present
+  useEffect(() => {
+    const fetchForm = async () => {
+      if (!formId) return;
+
+      try {
+        const response = await axios.get(`http://localhost:3000/api/forms/${formId}`);
+        const form = response.data;
+        setFormName(form.title);
+        setFields(form.fields.length > 0 ? form.fields : [{ label: '', type: 'text', isEditingLabel: false }]);
+      } catch (error) {
+        console.error('Error fetching form:', error);
+      }
+    };
+
+    fetchForm();
+  }, [formId]);
+
   const addField = (index: number) => {
     const newField = { label: '', type: 'text', isEditingLabel: false };
     const newFields = [...fields];
-    newFields.splice(index +1, 0, newField); 
+    newFields.splice(index + 1, 0, newField);
     setFields(newFields);
   };
-  
 
   const handleFieldChange = (index: number, event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const newFields = [...fields];
@@ -47,9 +65,9 @@ const FormBuilder = () => {
     const commonProps = {
       value: field.label,
       onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => handleFieldChange(index, e),
-      className: "text-gray-500 border border-gray-300 bg-transparent rounded-md p-2 mb-2 w-full",
-      disabled: true, 
-      required: true
+      className: 'text-gray-500 border border-gray-300 bg-transparent rounded-md p-2 mb-2 w-full',
+      disabled: true,
+      required: true,
     };
 
     switch (field.type) {
@@ -70,61 +88,59 @@ const FormBuilder = () => {
     const formTitle = title || formName;
 
     if (!formTitle) {
-      alert("Form title is required!");
+      alert('Form title is required!');
       return;
     }
 
     try {
-      const response = await axios.post('http://localhost:3000/api/forms', { title: formTitle, fields });
+      const updatedForm = { title: formTitle, fields };
 
-      const formId = response.data._id;
+      const response = await axios.put(`http://localhost:3000/api/forms/${formId}`, updatedForm);
 
+      // After successfully updating, redirect or show a message
       const generatedLink = `http://localhost:3000/view/${formId}`;
       setShareLink(generatedLink);
-
       setShowModal(true);
-
-      setTitle('');
-      setFields([{ label: '', type: 'text', isEditingLabel: false }]);
-      setFormName('');
-      setEditFormName(false);
     } catch (error) {
-      console.error("Error creating form:", error);
+      console.error('Error updating form:', error);
     }
   };
 
-  const handleFormNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormName(event.target.value);
-  };
-
   const handleDeleteField = (index: number) => {
+    if (fields.length === 1) {
+      // Prevent deletion if there is only one field left
+      alert('You cannot delete the last field.');
+      return;
+    }
+
     const newFields = fields.filter((_, fieldIndex) => fieldIndex !== index);
     setFields(newFields);
   };
 
   return (
-    <div className="w-full flex h-screen overflow-y-auto bg-[#F0EBF8] text-black">
+    <div className="w-full flex  overflow-y-scroll pb-10 bg-[#F0EBF8] text-black">
       <div className="w-full mx-auto">
-        <div className='w-1/2 mx-auto '>
+        <div className="w-1/2 mx-auto ">
           <div className="flex w-full pl-8 items-center bg-white h-28 rounded-xl my-4">
-            {editFormName ? (
-              <div className="flex  items-center text-3xl text-center  ">
+            {formName ? (
+              <div className="flex items-center text-3xl text-center">
                 <input
                   type="text"
-                  className=" bg-transparent w-full border-b"
-                  placeholder='Untitled Form'
+                  className="bg-transparent w-full border-b"
+                  placeholder="Untitled Form"
                   value={formName}
-                  onChange={handleFormNameChange}
-                  onBlur={() => setEditFormName(false)}  // Disable editing onBlur
-                  onClick={() => setEditFormName(true)}  // Enable editing onClick
+                  onChange={(e) => setFormName(e.target.value)}
+                  onBlur={() => setFormName(formName)}
+                  onClick={() => setFormName(formName)}
+                  autoFocus
                 />
               </div>
             ) : (
               <h1
                 className="text-3xl text-start cursor-pointer border-b w-full"
-                onClick={() => setEditFormName(true)}  // Enable editing onClick
+                onClick={() => setFormName('Untitled Form')}
               >
-                {formName || "Untitled Form"}
+                {formName || 'Untitled Form'}
               </h1>
             )}
           </div>
@@ -142,6 +158,7 @@ const FormBuilder = () => {
                           onChange={(e) => handleFieldChange(index, e)}
                           onBlur={() => handleLabelBlur(index)}
                           className="w-full bg-transparent border-b pl-2 mb-2"
+                          autoFocus
                         />
                       ) : (
                         <h3 className="cursor-pointer border-b w-full ">{field.label || 'Untitled Field'}</h3>
@@ -158,22 +175,21 @@ const FormBuilder = () => {
                       <option value="number">Number</option>
                       <option value="textarea">Textarea</option>
                     </select>
-
                   </div>
                   {renderField(field, index)}
                 </div>
 
-                <div className=" bottom-2 right-2 flex space-x-2 justify-end">
+                <div className="bottom-2 right-2 flex space-x-2 justify-end">
                   <button
                     type="button"
-                    className=" text-blue-500 p-2 rounded-md"
-                    onClick={()=>addField(index)}
+                    className="text-blue-500 p-2 rounded-md"
+                    onClick={() => addField(index)}
                   >
-                    <FaPlus size={20}/>
+                    <FaPlus size={20} />
                   </button>
                   <button
                     type="button"
-                    className=" text-red-500 p-2 rounded-md"
+                    className="text-red-500 p-2 rounded-md"
                     onClick={() => handleDeleteField(index)}
                   >
                     <FaTrash size={20} />
@@ -186,7 +202,7 @@ const FormBuilder = () => {
               className="btn btn-success w-1/2 text-xl text-white mt-4"
               onClick={handleSubmit}
             >
-              Submit
+              Update Form
             </button>
           </div>
         </div>

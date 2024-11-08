@@ -14,7 +14,7 @@ export async function GET(
     const objectId = new ObjectId(id);
 
     // Find the response by formId
-    const response = await Response.findOne({ formId: objectId });
+    const response = await Response.find({ formId: objectId });
 
     // If no response is found, return a 404
     if (!response) {
@@ -23,6 +23,8 @@ export async function GET(
         { status: 404 }
       );
     }
+
+    console.log(response)
 
     return NextResponse.json(response, { status: 200 });
     

@@ -23,17 +23,6 @@ const UserSchema = new mongoose.Schema(
       minlength: [3, 'Username must be at least 3 characters long'],
       trim: true,
     },
-    isVerified: {
-      type: Boolean,
-      default: false,
-    },
-    verificationToken: {
-      type: String,
-      unique: true,
-    },
-    verificationTokenExpiresAt: {
-      type: Date,
-    },
   },
   {
     timestamps: true,

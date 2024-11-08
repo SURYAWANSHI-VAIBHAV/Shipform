@@ -1,14 +1,12 @@
-// pages/auth/signup.tsx
 'use client'
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-// import { useRouter } from 'next/router';
 import { useState } from 'react';
 import axios from 'axios';
 import Nav from '@/components/Navigation/nav';
+import heroImage from './../../../../public/Hero.png';
 
-// Define the Zod schema for validation
 const signupSchema = z.object({
   username: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
@@ -18,7 +16,6 @@ const signupSchema = z.object({
 type SignupFormData = z.infer<typeof signupSchema>;
 
 const SignupPage = () => {
-  // const router = useRouter();
   const [error, setError] = useState<string | null>(null);
 
   const {
@@ -32,9 +29,7 @@ const SignupPage = () => {
   const onSubmit = async (data: SignupFormData) => {
     setError(null);
     try {
-      console.log(data)
-      const res = await axios.post('/api/auth/signup', { ...data }); 
-      console.log(res.data);
+      const res = await axios.post('/api/auth/signup', { ...data });
     } catch (err) {
       setError('Signup failed. Please try again.');
       console.error(err);
@@ -42,61 +37,82 @@ const SignupPage = () => {
   };
 
   return (
-    <div>
-      <Nav/>
-      <div className="flex min-h-screen items-center justify-center bg-gray-100 text-black">
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="w-full max-w-md p-6 bg-white rounded-md shadow-md"
-      >
-        <h2 className="text-2xl font-bold mb-4 text-center">Sign Up</h2>
+    <div className="min-h-screen bg-gray-50 text-black">
+      <Nav />
+      <div className="flex items-center justify-center min-h-screen">
 
-        {error && <p className="text-red-500 text-center">{error}</p>}
+        <div className="flex w-full max-w-5xl bg-white shadow-lg rounded-lg">
 
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Name</label>
-          <input
-            type="text"
-            {...register('username')}
-            className="w-full px-4 py-2 mt-1 border bg-transparent rounded-md focus:ring focus:ring-blue-200 focus:outline-none"
-          />
-          {errors.username && (
-            <p className="text-red-500 text-sm mt-1">{errors.username.message}</p>
-          )}
+          <div className="w-1/2 hidden md:block">
+            <img
+              src={heroImage.src}
+              alt="Hero Image"
+              className="object-cover w-full h-full rounded-l-lg"
+            />
+          </div>
+
+          <div className="w-full md:w-1/2 p-8">
+            <h2 className="text-3xl font-semibold text-center text-gray-800 mb-8">Create Your Account</h2>
+
+            {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+              <div>
+                <label htmlFor="username" className="text-sm font-medium text-gray-700">Full Name</label>
+                <input
+                  id="username"
+                  type="text"
+                  {...register('username')}
+                  className="w-full p-2 mt-2 border-2 bg-transparent border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                {errors.username && (
+                  <p className="text-red-500 text-sm mt-1">{errors.username.message}</p>
+                )}
+              </div>
+
+              <div>
+                <label htmlFor="email" className="text-sm font-medium text-gray-700">Email Address</label>
+                <input
+                  id="email"
+                  type="email"
+                  {...register('email')}
+                  className="w-full p-2 mt-2 border-2 bg-transparent border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                {errors.email && (
+                  <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+                )}
+              </div>
+
+              <div>
+                <label htmlFor="password" className="text-sm font-medium text-gray-700">Password</label>
+                <input
+                  id="password"
+                  type="password"
+                  {...register('password')}
+                  className="w-full p-2 mt-2 border-2 bg-transparent border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                {errors.password && (
+                  <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
+                )}
+              </div>
+
+              <button
+                type="submit"
+                className="w-full py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                Sign Up
+              </button>
+            </form>
+
+            <div className="mt-6 text-center text-sm text-gray-600">
+              <p>
+                Already have an account?{' '}
+                <a href="/auth/signin" className="text-blue-600 hover:underline">Login here</a>
+              </p>
+            </div>
+          </div>
         </div>
-
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Email</label>
-          <input
-            type="email"
-            {...register('email')}
-            className="w-full px-4 py-2 mt-1 border bg-transparent rounded-md focus:ring focus:ring-blue-200 focus:outline-none"
-          />
-          {errors.email && (
-            <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
-          )}
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Password</label>
-          <input
-            type="password"
-            {...register('password')}
-            className="w-full px-4 py-2 mt-1 border bg-transparent rounded-md focus:ring focus:ring-blue-200 focus:outline-none"
-          />
-          {errors.password && (
-            <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
-          )}
-        </div>
-
-        <button
-          type="submit"
-          className="w-full py-2 px-4 text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:ring focus:ring-blue-200 focus:outline-none"
-        >
-          Sign Up
-        </button>
-      </form>
-    </div>
+      </div>
     </div>
   );
 };
