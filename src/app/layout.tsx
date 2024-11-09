@@ -32,7 +32,7 @@ export default function RootLayout({
       >
 
         {children}
-        <PrelineScript />
+        {/* <PrelineScript /> */}
         <Analytics/>
       </body>
     </html>

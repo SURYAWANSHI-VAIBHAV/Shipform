@@ -57,7 +57,7 @@ function Page() {
               <img
                 aria-hidden="true"
                 className="object-cover w-full h-full dark:hidden"
-                src={heroImage.src}
+                src={'https://i.pinimg.com/736x/05/4d/80/054d80fd31df802126f46a375ebb7c4a.jpg'}
                 alt="Office"
               />
               <img

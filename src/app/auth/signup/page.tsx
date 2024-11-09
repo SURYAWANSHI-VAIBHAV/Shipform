@@ -28,12 +28,8 @@ const SignupPage = () => {
 
   const onSubmit = async (data: SignupFormData) => {
     setError(null);
-    try {
-      const res = await axios.post('/api/auth/signup', { ...data });
-    } catch (err) {
-      setError('Signup failed. Please try again.');
-      console.error(err);
-    }
+    const res = await axios.post('/api/auth/signup', { ...data });
+    console.log(res)
   };
 
   return (
@@ -45,7 +41,7 @@ const SignupPage = () => {
 
           <div className="w-1/2 hidden md:block">
             <img
-              src={heroImage.src}
+              src={'https://i.pinimg.com/736x/05/4d/80/054d80fd31df802126f46a375ebb7c4a.jpg'}
               alt="Hero Image"
               className="object-cover w-full h-full rounded-l-lg"
             />
